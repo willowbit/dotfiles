@@ -8,6 +8,4 @@ Went for a minimal monochrome-candy theme. Not much in here, but I'll add to it 
 
 Credit:
 
-Wallpaper taken from - https://github.com/TheRealKizu/dotfiles
-
 Bunnyfetch copied from - https://github.com/elenapan/dotfiles
