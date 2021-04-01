@@ -1,5 +1,6 @@
 # dotfiles
 
+![alt text](https://github.com/willowbit/dotfiles/blob/main/train_xfce.png?raw=true)
 ![alt text](https://github.com/CuteBlueRadio/dotfiles/blob/main/screenshot.png?raw=true)
 
 My first set of dotfiles!
