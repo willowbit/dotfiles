@@ -1,0 +1,103 @@
+[bar/main]
+
+monitor = HDMI1
+
+; Use the specified monitor as a fallback if the main one is not found.
+monitor-fallback = eDP1
+
+override-redirect = false
+
+wm-restack = i3
+
+; Put the bar at the bottom of the screen
+bottom = true
+
+fixed-center = true
+
+; Dimension defined as pixel value (e.g. 35) or percentage (e.g. 50%),
+; the percentage can optionally be extended with a pixel offset like so:
+; 50%:-10, this will result in a width or height of 50% minus 10 pixels
+width = 100%
+height = 30
+
+offset-x = 0
+offset-y = 0
+
+; Background ARGB color (e.g. #f00, #ff992a, #ddff1023)
+background = #30243D
+
+; Foreground ARGB color (e.g. #f00, #ff992a, #ddff1023)
+foreground = #7D8AD5
+
+; Number of spaces to add before/after each module
+; Individual side values can be defined using:
+;   module-margin-{left,right}
+module-margin = 1
+
+
+font-0 = Patrick Hand:size=13
+font-1 = MaterialIcons:size=13
+font-2 = Typicons:size=15
+
+modules-left = 
+modules-center = apps
+modules-right = devices back song artist skip device volume
+
+separator = 
+
+; Available positions:
+;   left
+;   center
+;   right
+;   none
+tray-position = right
+
+; Tray icon max size
+tray-maxsize = 16
+
+; Tray offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
+tray-offset-x = 0
+tray-offset-y = 0
+
+; Pad the sides of each tray icon
+tray-padding = 0
+
+; Scale factor for tray clients
+tray-scale = 1.0
+
+[module/song]
+type = custom/script
+exec = exec /usr/bin/python $HOME/.config/polybar/spotifystatus.py -s
+interval = 1
+click-left = spotify toggle
+
+[module/artist]
+type = custom/script
+exec = exec /usr/bin/python $HOME/.config/polybar/spotifystatus.py -a
+interval = 1
+click-left = spotify toggle
+
+[module/skip]
+type = custom/text
+content = 
+click-left = spotify next
+
+[module/back]
+type = custom/text
+content = 
+click-left = spotify previous
+
+[module/apps]
+type = custom/menu
+expand-right = true
+
+[module/device]
+type = custom/script
+exec = /usr/bin/python $HOME/.config/polybar/spotifystatus.py -d
+click-left = /usr/bin/python $HOME/.config/polybar/spotifystatus.py --switch-device
+interval = 3
+
+[module/volume]
+type = custom/script
+exec = /usr/bin/python $HOME/.config/polybar/spotifystatus.py -v
+interval = 0.5
