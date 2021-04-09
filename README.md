@@ -3,9 +3,7 @@
 ![alt text](https://github.com/willowbit/dotfiles/blob/main/train_xfce.png?raw=true)
 ![alt text](https://github.com/CuteBlueRadio/dotfiles/blob/main/screenshot.png?raw=true)
 
-My first set of dotfiles!
-
-Went for a minimal monochrome-candy theme. Not much in here, but I'll add to it as time goes on.
+Just a bunch o' stuff for when I eventually break my system and lose everything.
 
 Credit:
 
