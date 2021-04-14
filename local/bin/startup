@@ -1,0 +1,20 @@
+#!/bin/bash
+
+xrandr --output HDMI1 --auto --left-of eDP1 --primary
+
+#feh --bg-fill ~/wallpapers/peaceful_forest_by_bmspire_dec4j13.jpg
+#wallpapername="weavingatale"
+#wallpapername="train1"
+wallpapername="arch.png"
+feh --bg-fill ~/wallpapers/$wallpapername
+
+#guake
+
+#picom
+
+#killall spotifyd
+
+#spotifyd --config-path ~/.config/spotifyd/config
+picom --backend glx &
+polybar main &
+#polybar top &

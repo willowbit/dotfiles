@@ -1,0 +1,7 @@
+#!/bin/bash
+spotifyd
+spotify pause
+spt play --name "willy's lofi playlist" --playlist --random
+spotify devices -s Acacia
+spotify status -v
+# alacritty -t lofi -e cava -p ~/.config/cava/candy &

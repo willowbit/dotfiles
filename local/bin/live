@@ -1,0 +1,13 @@
+#!/usr/bin/python3
+import subprocess, sys
+
+if len(sys.argv) > 1:
+	if sys.argv[1] == '-m':
+	        subprocess.Popen("mpv https://www.youtube.com/watch?v=5qap5aO4i9A --no-video --fs", shell=True)
+	if sys.argv[1] == '-k':
+		subprocess.Popen("killall mpv", shell=True)
+else:
+        subprocess.Popen("mpv https://www.youtube.com/watch?v=5qap5aO4i9A", shell=True)
+
+# mpv https://www.youtube.com/watch?v=5qap5aO4i9A --no-video
+# mpv https://www.youtube.com/watch?v=5qap5aO4i9A

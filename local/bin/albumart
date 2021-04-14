@@ -1,0 +1,2 @@
+#!/bin/bash
+pqiv --watch-files=on $HOME/.tmp/albumart --hide-info-box & $HOME/scripts/getalbumart.py && fg
