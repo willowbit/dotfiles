@@ -1,0 +1,221 @@
+[bar/main]
+monitor = HDMI1
+
+pseudo-transparency = true
+
+; Use the specified monitor as a fallback if the main one is not found.
+monitor-fallback = eDP1
+
+override-redirect = true
+wm-restack = i3
+
+bottom = true
+fixed-center = true
+padding-left = 0
+padding-right = 5
+
+; Dimension defined as pixel value (e.g. 35) or percentage (e.g. 50%),
+; the percentage can optionally be extended with a pixel offset like so:
+; 50%:-10, this will result in a width or height of 50% minus 10 pixels
+width = 90%
+height = 40
+
+offset-x = 125
+offset-y = 12
+
+; Background ARGB color (e.g. #f00, #ff992a, #ddff1023)
+; background = #30243D
+background = #21262E
+
+; Foreground ARGB color (e.g. #f00, #ff992a, #ddff1023)
+foreground = #7D8AD5
+
+; Number of spaces to add before/after each module
+; Individual side values can be defined using:
+;   module-margin-{left,right}
+module-margin = 2
+
+radius = 15
+
+font-0 = Patrick Hand:size=13;3
+font-1 = MaterialIcons:size=13;3
+font-2 = Typicons:size=15;3
+font-3 = 3270Medium NF:size=26;6
+font-4 = 3270Medium NF:size=36;6
+
+modules-left = launcher i3
+modules-center = date time
+modules-right = back song skip
+
+separator = 
+
+; Available positions:
+;   left
+;   center
+;   right
+;   none
+tray-position = none
+
+; Tray icon max size
+tray-maxsize = 16
+
+; Tray offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
+tray-offset-x = 1100
+tray-offset-y = 0
+
+tray-padding = 0
+tray-scale = 1.0
+
+[module/song]
+type = custom/script
+exec = exec /home/williammagland/scripts/spotifystatus.py -s
+interval = 2.5
+click-left = playerctl pause
+click-right = playerctl play
+
+[module/skip]
+type = custom/text
+content = 
+click-left = playerctl next
+
+[module/back]
+type = custom/text
+content = 
+click-left = playerctl previous
+
+[module/i3]
+type = internal/i3
+pin-workspaces = true
+index-sort = true
+enable-scroll = true
+wrapping-scroll = true
+label-separator-padding = 3
+label-separator = |
+ws-icon-default = 
+label-focused = 
+label-unfocused = 
+
+[module/launcher]
+type = custom/text
+content = 
+content-font = 5
+content-padding = 1
+content-background = #7D8AD5
+content-foreground = #21262E
+click-left = rofi -show run -config /home/williammagland/.config/rofi/config.rasi
+
+[module/date]
+type = internal/date
+
+; Seconds to sleep between updates
+; Default: 1.0
+interval = 1.0
+
+; See "https://en.cppreference.com/w/cpp/io/manip/put_time" for details on how to format the date string
+; NOTE: if you want to use syntax tags here you need to use %%{...}
+date = %Y-%m-%d%
+
+; Optional time format
+time = %H:%M
+
+; if `date-alt` or `time-alt` is defined, clicking
+; the module will toggle between formats
+date-alt = %A, %d %B %Y
+time-alt = %H:%M:%S
+
+
+[bar/top]
+monitor = HDMI1
+
+pseudo-transparency = true
+
+; Use the specified monitor as a fallback if the main one is not found.
+monitor-fallback = eDP1
+
+override-redirect = false
+wm-restack = i3
+
+bottom = false
+fixed-center = true
+padding-left = 5
+padding-right = 5
+
+; Dimension defined as pixel value (e.g. 35) or percentage (e.g. 50%),
+; the percentage can optionally be extended with a pixel offset like so:
+; 50%:-10, this will result in a width or height of 50% minus 10 pixels
+width = 100%
+height = 23
+
+offset-x = 0
+offset-y = 0
+
+; Background ARGB color (e.g. #f00, #ff992a, #ddff1023)
+; background = #30243D
+background = #1c0c2e
+
+; Foreground ARGB color (e.g. #f00, #ff992a, #ddff1023)
+foreground = #7D8AD5
+
+; Number of spaces to add before/after each module
+; Individual side values can be defined using:
+;   module-margin-{left,right}
+module-margin = 2
+
+radius = 0
+
+font-0 = Patrick Hand:size=10;2
+font-1 = MaterialIcons:size=10;3
+font-2 = Typicons:size=12;3
+font-3 = 3270Medium NF:size=20;6
+font-4 = 3270Medium NF:size=20;6
+
+modules-left = i3heart
+modules-center = date
+modules-right = brightness pulseaudio back song skip
+
+separator = 
+
+; Available positions:
+;   left
+;   center
+;   right
+;   none
+tray-position = none
+
+; Tray icon max size
+tray-maxsize = 16
+
+; Tray offset defined as pixel value (e.g. 35) or percentage (e.g. 50%)
+tray-offset-x = 960
+tray-offset-y = 0
+
+tray-padding = 0
+tray-scale = 1.0
+
+[module/i3heart]
+type = internal/i3
+pin-workspaces = true
+index-sort = true
+enable-scroll = true
+wrapping-scroll = true
+label-separator-padding = 3
+label-separator = |
+ws-icon-default = 
+label-focused = 
+label-unfocused = 
+
+[module/pulseaudio]
+type = internal/pulseaudio
+sink = alsa_output.usb-Blue_Microphones_Yeti_Stereo_Microphone_REV8-00.analog-stereo
+interval = 5
+use-ui-max = true
+
+[module/brightness]
+type = internal/backlight
+card = intel_backlight
+enable-scroll = true
+
+[module/time]
+type = internal/date
+time = |   %H:%M %S
+label = %time%

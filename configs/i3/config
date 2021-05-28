@@ -33,6 +33,10 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+# Scratchpad stuff
+bindsym $mod+Shift+j move scratchpad
+bindsym $mod+j scratchpad show
+
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
@@ -44,7 +48,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty --config-file /home/williammagland/.config/alacritty/alacritty_train.yml
+bindsym $mod+Return exec alacritty --config-file /home/williammagland/.config/alacritty/pinkish.yml
 
 # take screenshot
 bindsym $Print exec gnome-screenshot
@@ -61,23 +65,11 @@ bindsym $mod+d exec rofi -show run -config /home/williammagland/.config/rofi/con
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
-# change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
-
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-
-# move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -188,18 +180,20 @@ bindsym $mod+r mode "resize"
 #        status_command i3status
 #}
 
-for_window [class=".*"] border pixel 4
+for_window [class=".*"] border pixel 0
 
 gaps inner 5
-gaps outer 5
-gaps bottom 55
-gaps top 0
+#gaps outer 80
+gaps outer 0
+gaps bottom 43
 
-client.focused          #7D8AD5 #7D8AD5 #7D8AD5 #7D8AD5   #5F676A
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #222222
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #222222
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #222222
+#client.focused          #B3AF89 #B3AF89 #B3AF89 #B3AF89   #B3AF89
+#client.focused_inactive #333333 #5f676a #ffffff #484e50   #222222
+#client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+#client.urgent           #2f343a #900000 #ffffff #900000   #222222
+#client.placeholder      #000000 #0c0c0c #ffffff #000000   #222222
+
+exec-always i3refresh
 
 workspace 1 output HDMI1
 workspace 2 output HDMI1

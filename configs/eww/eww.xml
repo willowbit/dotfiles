@@ -1,0 +1,152 @@
+<!-- The main eww configuration file. This is where your widgets and how they appear on the screen and what they
+contain are defined. -->
+
+<eww>
+  <definitions>
+    <!-- This is the place where you structure your widgets, align them and stuff. -->
+    <def name="time">
+      <!--Time-->
+      <box class="time">{{hour}}:{{min}} {{month}} {{number_day}}, {{year_full}}</box>
+    </def>
+
+    <def name='brightnessslider'>
+      <box orientation="h" class="slider-vol" space-evenly="true" halign="fill">
+        <scale min="9" max="937" value="{{backlight}}" onchange="echo {} > /sys/class/backlight/intel_backlight/brightness"/>
+      </box>
+    </def>
+
+    <def name='power_menu'>
+      <box orientation="h" class="slider-vol" space-evenly="true">
+        <button onclick="systemctl poweroff">⏻</button>
+        <button onclick="reboot">ﰇ</button>
+        <button onclick="systemctl suspend"></button>
+      </box>
+    </def>
+
+    <def name="albumart">
+      <box orientation="h" space-evenly="true" width="250" height="250" valign="center">
+        <image path="{{albumimage}}" width="250" height="250">
+        </image>
+      </box>
+    </def>
+
+    <def name="controller">
+      <box orientation="h" class="foo" halign="center" space-evenly="false">
+        <!-- <button onclick="playerctl previous"></button>
+        <button onclick="spotify next"></button> -->
+        <label text="{{music}}" limit-width="30" tooltip="{{music}}"></label>
+        <label text="..."></label>
+      </box>
+    </def>
+
+    <def name="spacer">
+      <box orientation="h" halign="center">
+        <label text="">
+        </label>
+      </box>
+    </def>
+
+    <def name="spotify">
+      <box orientation="v" space-evenly="false">
+        <spacer/>
+        <albumart/>
+        <controller/>
+      </box>
+    </def>
+
+    <def name="volumeslider">
+      <!--A basic volume slider-->
+      <box orientation="h" class="slider-vol" space-evenly="true">
+        <scale min="0" max="101" value="{{volume}}" onchange="amixer -D pulse sset Master {}%"/>
+      </box>
+    </def>
+
+    <def name="_volume">
+      <box space-evenly="true">
+        <volumeslider/>
+      </box>
+    </def>
+
+  </definitions>
+
+  <variables>
+
+	  <!-- Music vars -->
+    <!-- These are your variables. Like they say, they run a script, and then output that to the variable. In
+    the following var, we get music info from playerctl. -->
+    <script-var name="music" interval="5s">playerctl --ignore-player firefox metadata --format '{{ artist }} - {{ title }}'</script-var>
+    <script-var name="albumimage" interval="5s">/home/williammagland/scripts/albumart && echo /home/williammagland/.tmp/albumartsmall.png</script-var>
+    <!--Volume var-->
+    <!-- If your vars get too complex to write down here, you can use an external script and paste it's path here as well, as shown below.
+     -->
+    <script-var name="backlight" interval="20ms">cat /sys/class/backlight/intel_backlight/brightness</script-var>
+    
+    <script-var name="volume" interval="20ms">~/.config/eww/scripts/getvol</script-var>
+
+    <!--Date vars-->
+	    
+    <!--Battery charge var-->
+    <script-var name="battery-remaining" interval="2m">cat /sys/class/power_supply/BAT0/capacity</script-var>
+
+  </variables>
+
+  <windows>
+    
+    <window name="album-0" stacking="fg" screen="0" focusable="false">
+      <geometry x="78%" y="49%" width="295" height="295"/> <!--Specifies geometry-->
+      <reserve side="right" distance="0%"/>
+      <widget>
+        <spotify/>
+      </widget>
+    </window>
+
+    <window name="volume-0" stacking="fg" screen="0" focusable="false">
+      <geometry x="78%" y="88%" width="295" height="50"/> <!--Specifies geometry-->
+      <reserve side="right" distance="0%"/>
+      <widget>
+        <_volume/>
+      </widget>
+    </window>
+
+    <window name="album-1" stacking="fg" screen="1" focusable="false">
+      <geometry x="86%" y="72%" width="295" height="295"/> <!--Specifies geometry-->
+      <reserve side="right" distance="0%"/>
+      <widget>
+        <spotify/>
+      </widget>
+    </window>
+
+    <window name="volume-1" stacking="fg" screen="1" focusable="false">
+      <geometry x="86%" y="93%" width="295" height="50"/> <!--Specifies geometry-->
+      <reserve side="right" distance="0%"/>
+      <widget>
+        <_volume/>
+      </widget>
+    </window>
+
+    <window name="brightness" stacking="fg" screen="1" focusable="false">
+      <geometry x="1210" y="50" width="138" height="20"/> <!--Specifies geometry-->
+      <reserve side="right" distance="0%"/>
+      <widget>
+        <brightnessslider/>
+      </widget>
+    </window>
+    
+    <window name="volume_top" stacking="fg" screen="1" focusable="false">
+      <geometry x="1210" y="50" width="138" height="20"/> <!--Specifies geometry-->
+      <reserve side="right" distance="0%"/>
+      <widget>
+        <volumeslider/>
+      </widget>
+    </window>
+
+    <window name="powermenu" stacking="fg" screen="1" focusable="false">
+      <geometry x="1210" y="50" width="138" height="20"/> <!--Specifies geometry-->
+      <reserve side="right" distance="0%"/>
+      <widget>
+        <power_menu/>
+      </widget>
+    </window>
+
+  </windows>
+</eww>
